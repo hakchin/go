@@ -12,10 +12,8 @@ func dan(a int){
 
 func main(){
     var j int
-    j = 2
-    for j < 10 {
+    for j = 2; j < 10; j++ {
         dan(j)
-        j = j + 1
     }
 }
 
