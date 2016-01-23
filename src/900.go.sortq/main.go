@@ -19,5 +19,3 @@ func main(){
     }
 }
 
-package main
-import "fmt"
