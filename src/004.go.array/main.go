@@ -1,7 +1,5 @@
 package main
-
 import "fmt"
-
 func main() {
     x := [5]float64{
         1,
