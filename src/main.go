@@ -3,9 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Print("Enetr a number: ")
-	var input float64
-	fmt.Scanf("%f", &input)
-	output := input * 2
-	fmt.Println(output)
+	slice1 := []int{1, 2, 3}
+	slice2 := append(slice1, 4, 5)
+	fmt.Println(slice1, slice2)
 }
