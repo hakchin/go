@@ -14,5 +14,6 @@ func main() {
 	elements["O"] = "Oxygen"
 	elements["F"] = "Fluorine"
 	elements["Ne"] = "Neon"
-	fmt.Println(elements["Li"])
+	//fmt.Println(elements["Li"])
+	fmt.Println(elements["Un"])
 }
