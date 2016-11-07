@@ -1,9 +1,10 @@
 package main
 
-func f() (int, int) {
-	return 5, 6
-}
+import "fmt"
+
 func main() {
-	int x; int y;
-	x, y := f()
+	add := func(x, y int) int {
+		return x + y
+	}
+	fmt.Println(add(1, 1))
 }
