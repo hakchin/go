@@ -2,13 +2,20 @@ package main
 
 import "fmt"
 
-func first() {
-	fmt.Println("1st")
-}
-func second() {
-	fmt.Println("2nd")
+// func zero(x int) {
+// 	x = 0
+// }
+// func main() {
+// 	x := 5
+// 	zero(x)
+// 	fmt.Println(x) // x is still 5
+// }
+
+func zero(xPtr *int) {
+	*xPtr = 0
 }
 func main() {
-	defer second()
-	first()
+	x := 5
+	zero(&x)
+	fmt.Println(x) // x is 0
 }
