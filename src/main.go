@@ -2,20 +2,26 @@ package main
 
 import "fmt"
 
-// func zero(x int) {
-// 	x = 0
-// }
-// func main() {
-// 	x := 5
-// 	zero(x)
-// 	fmt.Println(x) // x is still 5
-// }
-
-func zero(xPtr *int) {
-	*xPtr = 0
+func zeroval(ival int) {
+	ival = 0
 }
+
+func zeroptr(iptr *int) {
+	*iptr = 0
+}
+
 func main() {
-	x := 5
-	zero(&x)
-	fmt.Println(x) // x is 0
+	i := 1
+	fmt.Println("initial:", i)
+
+	zeroval(i)
+	fmt.Println("zeroval:", i)
+
+	// The `&i` syntax gives the memory address of `i`,
+	// i.e. a pointer to `i`.
+	zeroptr(&i)
+	fmt.Println("zeroptr:", i)
+
+	// Pointers can be printed too.
+	fmt.Println("pointer:", &i)
 }
