@@ -1,11 +1,27 @@
-package main
+package math
 
-import (
-	"com/ppoppo/stringutil"
-	"fmt"
-)
+import "testing"
 
-func main() {
-	//	fmt.Printf(stringutil.Reverse("!.oG ,olleH"))
-	fmt.Println(stringutil.Reverse("!.oG ,olleH"))
+type testpair struct {
+	values  []float64
+	average float64
+}
+
+var tests = []testpair{
+	{[]float64{1, 2}, 1.5},
+	{[]float64{1, 1, 1, 1, 1, 1}, 1},
+	{[]float64{-1, 1}, 0},
+}
+
+func TestAverage(t *testing.T) {
+	for _, pair := range tests {
+		v := Average(pair.values)
+		if v != pair.average {
+			t.Error(
+				"for", pair.values,
+				"expected", pair.average,
+				"got", v,
+			)
+		}
+	}
 }
