@@ -1,27 +1,43 @@
-package math
+package main
 
-import "testing"
+import (
+	"fmt"
+	"strings"
+)
 
-type testpair struct {
-	values  []float64
-	average float64
-}
+func main() {
+	fmt.Println(
+		// true
+		strings.Contains("test", "es"),
 
-var tests = []testpair{
-	{[]float64{1, 2}, 1.5},
-	{[]float64{1, 1, 1, 1, 1, 1}, 1},
-	{[]float64{-1, 1}, 0},
-}
+		// 2
+		strings.Count("test", "t"),
 
-func TestAverage(t *testing.T) {
-	for _, pair := range tests {
-		v := Average(pair.values)
-		if v != pair.average {
-			t.Error(
-				"for", pair.values,
-				"expected", pair.average,
-				"got", v,
-			)
-		}
-	}
+		// true
+		strings.HasPrefix("test", "te"),
+
+		// true
+		strings.HasSuffix("test", "st"),
+
+		// 1
+		strings.Index("test", "e"),
+
+		// "a-b"
+		strings.Join([]string{"a", "b"}, "-"),
+
+		// == "aaaaa"
+		strings.Repeat("a", 5),
+
+		// "bbaa"
+		strings.Replace("aaaa", "a", "b", 2),
+
+		// []string{"a","b","c","d","e"}
+		strings.Split("a-b-c-d-e", "-"),
+
+		// "test"
+		strings.ToLower("TEST"),
+
+		// "TEST"
+		strings.ToUpper("test"),
+	)
 }
