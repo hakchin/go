@@ -1,28 +1,16 @@
 package main
+
 import (
+	"container/list"
 	"fmt"
-	"os"
 )
+
 func main() {
-	file, err := os.Open("test.txt")
-	if err != nil {
-		// handle the error here
-		return
+	var x list.List
+	x.PushBack(1)
+	x.PushBack(2)
+	x.PushBack(3)
+	for e := x.Front(); e != nil; e = e.Next() {
+		fmt.Println(e.Value.(int))
 	}
-	defer file.Close()
-
-	// get the file size
-	stat, err := file.Stat()
-	iff err ! nil {
-		return
-	}
-	// read the file 
-	bs := make([]byte, stat.Size())
-	_, err = file.Read(bs)
-	if err !=nil {
-		return
-	}
-
-	str := string(bs)
-	fmt.Println(str)
 }
