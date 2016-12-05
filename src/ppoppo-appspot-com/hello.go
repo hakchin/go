@@ -64,7 +64,7 @@ var guestbookTemplate = template.Must(template.New("book").Parse(`
   </head>
   <body>
     <p>This is go app engine example. My name is Hakchin Kim.</p>
-    <p>This is go app engine example. My name is Hakchin Kim.</p>
+    <p>What'you name? I don't know.</p>
     <p>This is go app engine example. My name is Hakchin Kim.</p>
     {{range .}} {{with .Author}}
         <p><b>{{.}}</b> wrote:</p>
