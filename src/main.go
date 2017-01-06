@@ -1,39 +1,22 @@
 // Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
 // License: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-// See page 12.
-
+// See page 29.
 //!+
 
-// Dup3 prints the count and text of lines that
-// appear more than once in the named input files.
+// Ftoc prints two Fahrenheit-to-Celsius conversions.
 package main
 
-import (
-	"fmt"
-	"io/ioutil"
-	"os"
-	"strings"
-)
+import "fmt"
 
 func main() {
-	counts := make(map[string]int)
-	for _, filename := range os.Args[1:] {
-		data, err := ioutil.ReadFile(filename)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "dup3: %v\n", err)
-			continue
-		}
-		for _, line := range strings.Split(string(data), "\n") {
-			counts[line]++
-		}
+	const freezingF, boilingF = 32.0, 212.0
+	fmt.Printf("%g°F = %g°C\n", freezingF, fToC(freezingF)) // "32°F = 0°C"
+	fmt.Printf("%g°F = %g°C\n", boilingF, fToC(boilingF))   // "212°F = 100°C"
+}
 
-		for line, n := range counts {
-			if n > 1 {
-				fmt.Printf("%d\t%s\n", n, line)
-			}
-		}
-	}
+func fToC(f float64) float64 {
+	return (f - 32) * 5 / 9
 }
 
 //!-
