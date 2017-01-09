@@ -3,6 +3,10 @@
 
 // See page 33.
 //!+
+// usage : go run main.go a bc def
+// usage : go run main.go -n a bc def
+// usage : go run main.go -s / a bc def
+// usage : go run main.go -help
 
 // Echo4 prints its command-line arguments.
 package main
