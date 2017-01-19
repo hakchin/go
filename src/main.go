@@ -1,29 +1,29 @@
-// usage : go run main.go 36.5
-// Cf converts its numeric argument to Celsius and Fahrenheit.
+// usage : go run main.go
+// bitwise operations
 package main
 
-import (
-	"com/ppoppo/tempconv"
-	"fmt"
-	"os"
-	"strconv"
-)
+import "fmt"
 
 func main() {
-	for _, arg := range os.Args[1:] {
-		t, err := strconv.ParseFloat(arg, 64)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "cf: %v\n", err)
-			os.Exit(1)
-		}
-		f := tempconv.Fahrenheit(t)
-		c := tempconv.Celsius(t)
-		fmt.Printf("%s = %s, %s = %s\n", f, tempconv.FToC(f), c, tempconv.CToF(c))
-	}
+	var x uint8 = 1<<1 | 1<<5
+	var y uint8 = 1<<1 | 1<<2
 
-	i, err := strconv.Atoi("-42")
-	s := strconv.Itoa(-42)
-	fmt.Println(i)
-	fmt.Println(s)
-	fmt.Println(err)
+	fmt.Printf("%08b\n", x) // "00100010", the set {1, 5}
+	fmt.Printf("%08b\n", y) // "00000110", the set {1, 2}
+	fmt.Printf("\n")        //
+
+	fmt.Printf("%08b\n", x&y)  // "00000010", the intersection {1}
+	fmt.Printf("%08b\n", x|y)  // "00100110", the union {1, 2, 5}
+	fmt.Printf("%08b\n", x^y)  // "00100100", the symmetric difference {2, 5}
+	fmt.Printf("%08b\n", x&^y) // "00100000", the difference {5}
+	fmt.Printf("\n")           //
+
+	for i := uint(0); i < 8; i++ {
+		if x&(1<<i) != 0 { // membership test
+			fmt.Println(i) // "1", "5"
+		}
+	}
+	fmt.Printf("\n")           //
+	fmt.Printf("%08b\n", x<<1) // "01000100", the set {2, 6}
+	fmt.Printf("%08b\n", x>>1) // "00010001", the set {0, 4}
 }
