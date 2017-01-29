@@ -3,10 +3,12 @@ package main
 import "fmt"
 
 func main() {
-	type Rect struct {
-		width  int //width
-		height int //height
+	i := 0
+HERE:
+	fmt.Println(i)
+	i++
+	if i == 5 {
+		return
 	}
-	r := Rect{1, 2}
-	fmt.Println(r.width*2 + r.height*2)
+	goto HERE
 }
