@@ -1,13 +1,22 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-func main() {
-	myFunc("sjfskladjfs", 898, 8989)
-}
-func myFunc(s string, integers ...int) {
-	fmt.Println(s)
-	for i := 0; i < len(integers); i++ {
-		fmt.Println(integers[i])
+func displayInt(s string) {
+	if v, err := strconv.Atoi(s); err != nil {
+		fmt.Println(v)
+		fmt.Println(err)
+		fmt.Printf("%s는 정수가 아닙니다.\n", s)
+	} else {
+		fmt.Println(v)
+		fmt.Println(err)
+		fmt.Printf("정수값은 %d입니다.\n", v)
 	}
+}
+func main() {
+	displayInt("two")
+	displayInt("2")
 }
