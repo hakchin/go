@@ -1,22 +1,15 @@
+//
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
+import "fmt"
 
-func displayInt(s string) {
-	if v, err := strconv.Atoi(s); err != nil {
-		fmt.Println(v)
-		fmt.Println(err)
-		fmt.Printf("%s는 정수가 아닙니다.\n", s)
-	} else {
-		fmt.Println(v)
-		fmt.Println(err)
-		fmt.Printf("정수값은 %d입니다.\n", v)
-	}
+func callback(y int, f func(int, int)) {
+	f(y, 2) // call add(1,2)
+}
+
+func add(a, b int) {
+	fmt.Printf("%d + %d = %d\n", a, b, a+b) // 1 + 2 = 3
 }
 func main() {
-	displayInt("two")
-	displayInt("2")
+	callback(1, add) // 1 + 2 = 3
 }
