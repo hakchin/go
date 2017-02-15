@@ -3,17 +3,19 @@ package main
 
 import (
 	"fmt"
-	"strings"
-	"unicode"
+	"os"
 )
 
 func main() {
-	//한글이 처음으로 나타나는 인덱스를 반환
-	f := func(c rune) bool {
-		return unicode.Is(unicode.Hangul, c) //c가 한글이면 true를 반환
-	}
-	fmt.Println(strings.IndexFunc("Hello, 월드", f)) //7
-	fmt.Println(f)
-	fmt.Println(strings.IndexFunc("Hello, world", f)) // -1
-	fmt.Println(f)
+	var name string
+
+	// fmt 패키지의 Print 함수 사용
+	fmt.Print("이름을 입력하세요: ")
+
+	// fmt 패키지의 Scanf 함수 사용
+	fmt.Scanf("%s", &name)
+
+	// fmt 패키지의 Fprintf 함수 사용
+	// os 패키지의 Stdout 변수 사용
+	fmt.Fprintf(os.Stdout, "Hello %s\n", name)
 }
