@@ -1,15 +1,19 @@
 //
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"unicode"
+)
 
-func callback(y int, f func(int, int)) {
-	f(y, 2) // call add(1,2)
-}
-
-func add(a, b int) {
-	fmt.Printf("%d + %d = %d\n", a, b, a+b) // 1 + 2 = 3
-}
 func main() {
-	callback(1, add) // 1 + 2 = 3
+	//한글이 처음으로 나타나는 인덱스를 반환
+	f := func(c rune) bool {
+		return unicode.Is(unicode.Hangul, c) //c가 한글이면 true를 반환
+	}
+	fmt.Println(strings.IndexFunc("Hello, 월드", f)) //7
+	fmt.Println(f)
+	fmt.Println(strings.IndexFunc("Hello, world", f)) // -1
+	fmt.Println(f)
 }
