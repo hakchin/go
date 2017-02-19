@@ -1,4 +1,3 @@
-//
 package main
 
 import "fmt"
@@ -13,5 +12,4 @@ func main() {
 	for i, c := range s2 {
 		fmt.Printf("%c(%d)\t", c, i)
 	}
-	fmt.Println()
 }
