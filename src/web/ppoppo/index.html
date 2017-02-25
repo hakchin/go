@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Go Guestbook</title>
+  </head>
+  <body>
+    <p>This is go app engine example. My name is Hakchin Kim.</p>
+    <p>What'you name? I don't know.</p>
+    <p>This is go app engine example. My name is Hakchin Kim.</p>
+    {{range .}} {{with .Author}}
+        <p><b>{{.}}</b> wrote:</p>
+      {{else}}
+        <p>An anonymous person wrote:</p>
+      {{end}}
+      <pre>{{.Content}}</pre>
+    {{end}}
+    <form action="/sign" method="post">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="Sign Guestbook"></div>
+    </form>
+  </body>
+</html>

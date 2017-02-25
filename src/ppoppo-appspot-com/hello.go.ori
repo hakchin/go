@@ -50,12 +50,9 @@ func root(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// [END getall]
-	//	if err := guestbookTemplate.Execute(w, greetings); err != nil {
-	//		http.Error(w, err.Error(), http.StatusInternalServerError)
-	//	}
-	s.HandlerFunc("GET", "/", func(c *Context) {
-		c.RenderTemplate("/web/ppoppo/index.html", map[string]interface{}{"time": time.Now()})
-	})
+	if err := guestbookTemplate.Execute(w, greetings); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 // [END func_root]
