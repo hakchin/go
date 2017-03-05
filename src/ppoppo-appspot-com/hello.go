@@ -22,7 +22,7 @@ type Greeting struct {
 // [END greeting_struct]
 
 func init() {
-	http.HandleFunc("/", root)
+	http.HandleFunc("/", handler)
 	http.HandleFunc("/sign", sign)
 }
 
@@ -32,8 +32,8 @@ func guestbookKey(c appengine.Context) *datastore.Key {
 	return datastore.NewKey(c, "Guestbook", "default_guestbook", 0, nil)
 }
 
-// [START func_root]
-func root(w http.ResponseWriter, r *http.Request) {
+// [START func_handler]
+func handler(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	// Ancestor queries, as shown here, are strongly consistent with the High
 	// Replication Datastore. Queries that span entity groups are eventually
@@ -55,7 +55,7 @@ func root(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// [END func_root]
+// [END func_handler]
 
 var guestbookTemplate = template.Must(template.New("book").Parse(`
 <html>
