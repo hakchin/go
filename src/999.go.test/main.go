@@ -1,21 +1,39 @@
 // 슬라이스 삽입
 package main
 
-import "fmt"
+import (
+	"os"
+	"text/template"
+)
+
+type Person struct {
+	Name   string
+	Emails []string
+}
+
+const tmpl = `{{$name := .Name}}
+{{range .Emails}}
+    Name is {{$name}}, email is {{.}}
+{{end}}
+`
 
 func main() {
-	s := []int{1, 2, 3, 4, 5}
-	s = insert(s, []int{-3, -2}, 0) // s: [-3 -2 1 2 3 4 5]
-	fmt.Println(s)
+	person := Person{
+		Name:   "Satish",
+		Emails: []string{"satish@rubylearning.org", "satishtalim@gmail.com"},
+	}
 
-	s = insert(s, []int{0}, 2) // s: [-3 -2 0 1 2 3 4 5]
+	t := template.New("Person template")
 
-	fmt.Println(s)
+	t, err := t.Parse(tmpl)
 
-	s = insert(s, []int{6, 7}, len(s)) // s: [-3 -2 1 2 3 4 5 6 7]
+	if err != nil {
+		panic(err)
+	}
 
-	fmt.Println(s)
-}
-func insert(s, new []int, index int) []int {
-	return append(s[:index], append(new, s[index:]...)...)
+	err = t.Execute(os.Stdout, person)
+
+	if err != nil {
+		panic(err)
+	}
 }

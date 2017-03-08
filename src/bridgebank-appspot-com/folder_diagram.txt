@@ -1,0 +1,13 @@
+hakchin:go_projects
++---$GOPATH
+    +---src
+        +---bridgebank-appspot-com
+            |   goview.go
+            |   app.yaml
+            |   favicon.ico
+            |   
+            +---images
+            |       gsv.png
+            |       
+            +---css
+                    goview.css
