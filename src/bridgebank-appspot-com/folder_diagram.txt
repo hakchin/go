@@ -5,9 +5,9 @@ hakchin:go_projects
             |   goview.go
             |   app.yaml
             |   favicon.ico
-            |   
+            |
             +---images
             |       gsv.png
-            |       
+            |
             +---css
                     goview.css
