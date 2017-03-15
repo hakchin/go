@@ -1,6 +1,5 @@
-package guestbook
-
 // My name is Hakchin Kim.
+package guestbook
 
 import (
 	"html/template"
