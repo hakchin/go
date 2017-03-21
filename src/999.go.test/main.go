@@ -1,18 +1,11 @@
-// factorial calculation
 package main
 
-import (
-	"fmt"
-	"math/big"
-)
+import "fmt"
 
 func main() {
-	fmt.Print("Enter a number: ")
-	var input float64
-	fmt.Scanf("%f", &input)
-	x := new(big.Int)
-	var lv_input int64
-	lv_input = int64(input)
-	x.MulRange(1, lv_input)
-	fmt.Println(x)
+	numberMap := map[string]int{}
+	numberMap["one"] = 1
+	numberMap["two"] = 2
+	numberMap["three"] = 3
+	fmt.Println(numberMap)
 }
