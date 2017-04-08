@@ -5,8 +5,11 @@ import "fmt"
 func main() {
 	type rect struct{ w, h float64 }
 
-	var pRect *rect
-	var pInt *int
-	var pFloat *float64
-	var pComplex *complex128
+	var i int = 1
+	var p *int = &i
+	var s *rect = &rect{1, 2}
+
+	fmt.Println(p)
+	fmt.Println(s)
+
 }
