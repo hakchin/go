@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+
+	"google.golang.org/appengine"
 )
 
 // hdl is a handler that calls t.Execute, passing all of the query string values as data to the template
@@ -18,15 +20,17 @@ func hdl(t *template.Template) http.Handler {
 }
 
 func main() {
+
 	// This call does the following:
 	// - template.ParseGlob parses *all* templates in the templates folder
 	//		- Important if you have templates that depend on each other
 	// - template.Must checks the error returned by ParseGlob and panics if it's non-nil. Otherwise returns the template that ParseGlob returned
 	tpl := template.Must(template.New("site.html").ParseGlob("templates/*.html"))
 
-	log.Printf("Server listening on port 8080")
-	log.Printf("Example page: http://localhost:8080?a=b&a=c&c=d&d=e")
+	//	log.Printf("Server listening on port 8080")
+	//	log.Printf("Example page: http://localhost:8080?a=b&a=c&c=d&d=e")
 	if err := http.ListenAndServe(":8080", hdl(tpl)); err != nil {
 		log.Fatalf("error running server (%s)", err)
 	}
+	appengine.Main()
 }
