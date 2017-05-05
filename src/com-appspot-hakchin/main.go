@@ -1,57 +1,32 @@
 package main
 
 import (
-	"github.com/julienschmidt/httprouter"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 )
 
-// Model of stuff to render a page
-type Model struct {
-	Title string
-	Name  string
-}
-
-// Templates with functions available to them
-var templates = template.New("").Funcs(templateMap)
-
-// Parse all of the bindata templates
-func init() {
-	for _, path := range AssetNames() {
-		bytes, err := Asset(path)
-		if err != nil {
-			log.Panicf("Unable to parse: path=%s, err=%s", path, err)
+// hdl is a handler that calls t.Execute, passing all of the query string values as data to the template
+func hdl(t *template.Template) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Notice that t.Execute takes an io.Writer as its first argument. The variable w (an http.ResponseWriter) implements io.Writer, so we pass it and allow the implementation to call its Write function as necessary
+		if err := t.Execute(w, r.URL.Query()); err != nil {
+			http.Error(w, fmt.Sprintf("error executing template (%s)", err), http.StatusInternalServerError)
 		}
-		templates.New(path).Parse(string(bytes))
-	}
+	})
 }
 
-// Render a template given a model
-func renderTemplate(w http.ResponseWriter, tmpl string, p interface{}) {
-	err := templates.ExecuteTemplate(w, tmpl, p)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
-}
-
-// Well hello there
-func hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	model := Model{Name: ps.ByName("name")}
-	renderTemplate(w, "templates/hello.html", &model)
-}
-
-// The server itself
 func main() {
-	// mux handler
-	router := httprouter.New()
+	// This call does the following:
+	// - template.ParseGlob parses *all* templates in the templates folder
+	//		- Important if you have templates that depend on each other
+	// - template.Must checks the error returned by ParseGlob and panics if it's non-nil. Otherwise returns the template that ParseGlob returned
+	tpl := template.Must(template.New("site.html").ParseGlob("templates/*.html"))
 
-	// Example route that takes one rest style option
-	router.GET("/hello/:name", hello)
-
-	// Serve static assets via the "static" directory
-	router.ServeFiles("/static/*filepath", assetFS())
-
-	// Serve this program forever
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Printf("Server listening on port 8080")
+	log.Printf("Example page: http://localhost:8080?a=b&a=c&c=d&d=e")
+	if err := http.ListenAndServe(":8080", hdl(tpl)); err != nil {
+		log.Fatalf("error running server (%s)", err)
+	}
 }
