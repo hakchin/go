@@ -1,4 +1,4 @@
-// 어쩌구 저쩌구
+// from https://blog.joshsoftware.com/2014/03/12/learn-to-build-and-deploy-simple-go-web-apps-part-one/
 package goview
 
 import (
