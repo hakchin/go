@@ -1,3 +1,36 @@
+## application is mandatory
+## later on the web, we might use some other name
+#application: bridgebank-160215
+ 
+# version is mandatory
+#version: 1
+ 
+# api_version is mandatory
 api_version: go1
+ 
+# environment
 env: flex
+
+# runtime is mandatory
 runtime: go
+ 
+## handlers is mandatory
+#handlers:
+#- url: /.*
+#  script: _go_app
+
+#handlers:
+#- url: /favicon.ico
+#  static_files: favicon.ico
+#  upload: favicon.ico
+# 
+## All URLs beginning with /css are treated 
+## as paths to static files in the css/ directory.
+#- url: /css
+#  static_dir: css
+# 
+#- url: /images
+#  static_dir: images
+# 
+#- url: /.*
+#  script: _go_app
